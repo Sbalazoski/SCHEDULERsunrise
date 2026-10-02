@@ -1,0 +1,14 @@
+[build]
+  publish = "public"
+  command = "node init-db.js"
+  functions = "netlify/functions"
+
+[functions]
+  included_files = ["scheduler.sql.js"]
+  node_modules = ["sql.js", "sql-wasm.js"]
+
+[[redirects]]
+  from = "/api/*"
+  to = "/.netlify/functions/api"
+  status = 200
+  force = true

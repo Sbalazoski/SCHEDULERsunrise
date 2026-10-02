@@ -21,10 +21,8 @@
       <form id="unlock-form">
         <div class="input-group">
           <input type="password" id="unlock-password" placeholder=" " autocomplete="off" required>
-          <label for="unlock-password">PASSWORD</label>
-          <button type="submit" class="btn btn-primary btn-large">
-            <i class="fas fa-unlock"></i> UNLOCK
-          </button>
+          <label>Enter Password</label>
+          <button type="submit" class="btn btn-primary btn-large">UNLOCK</button>
         </div>
       </form>
     </div>
@@ -38,7 +36,7 @@
         <h1>SUNRISE</h1>
         <h2>SCHEDULER</h2>
       </div>
-      <p class="login-subtitle">Employee Scheduling System</p>
+      <p class="login-subtitle">Restaurant Employee Scheduling</p>
       <form id="login-form" class="login-form">
         <div class="input-group">
           <input type="text" id="username" placeholder=" " autocomplete="username" required>
@@ -48,13 +46,9 @@
           <input type="password" id="password" placeholder=" " autocomplete="current-password" required>
           <label for="password">Password</label>
         </div>
-        <button type="submit" class="btn btn-primary btn-large">
-          <i class="fas fa-sign-in-alt"></i> SIGN IN
-        </button>
+        <button type="submit" class="btn btn-primary btn-large">SIGN IN</button>
       </form>
-      <div class="login-hint">
-        <p>Need help? Call 555-0100</p>
-      </div>
+      <div class="login-hint">Need help? Call 555-0100</div>
     </div>
   </div>
 
@@ -62,22 +56,15 @@
   <div id="app" class="app hidden">
     <header class="header">
       <div class="header-left">
-        <h1 class="header-title">
-          <i class="fas fa-utensils"></i>
-          <span id="restaurant-name">Sunrise Restaurant</span>
-        </h1>
+        <h1 class="header-title"><i class="fas fa-utensils"></i> <span id="restaurant-name">Restaurant</span></h1>
       </div>
       <div class="header-center">
-        <h2 id="view-title">Dashboard</h2>
+        <h2 id="view-title">Schedule</h2>
       </div>
       <div class="header-right">
         <span id="user-name"></span>
-        <button id="lock-btn" class="btn btn-ghost btn-icon" title="Lock">
-          <i class="fas fa-lock"></i>
-        </button>
-        <button id="logout-btn" class="btn btn-ghost btn-icon" title="Logout">
-          <i class="fas fa-sign-out-alt"></i>
-        </button>
+        <button id="lock-btn" class="btn btn-ghost btn-icon" title="Lock"><i class="fas fa-lock"></i></button>
+        <button id="logout-btn" class="btn btn-ghost btn-icon" title="Logout"><i class="fas fa-sign-out-alt"></i></button>
       </div>
     </header>
 

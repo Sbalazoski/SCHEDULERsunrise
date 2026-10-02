@@ -1,100 +1,87 @@
 # Sunrise Scheduler - Restaurant Employee Scheduler
 
-An easy-to-use employee scheduling application designed for restaurant managers and head servers with no technical experience.
+An easy-to-use employee scheduling application for restaurants.
 
-## Quick Start
+## Quick Start (Local)
 
 ```bash
-node init-db.js    # Initialize database
+node init-db.js    # Initialize database (first time only)
 node server.js     # Start server
 # Open http://localhost:3000 in browser
 ```
 
-Login credentials:
-- **Admin**: `admin` / `admin`
-- **Head Server**: `server` / `server`
+**Login:** `admin` / `admin` or `server` / `server`
 
-## What It Does
+## How It Works
 
-The app has 4 main screens:
-
-### 1. Schedule (Main View)
-- Monthly view showing all employees as **rows** and **calendar days as columns**
-- Click any cell to add/edit a shift with Clock IN and Clock OUT times
+### Schedule View (Main Screen)
+- **Rows** = Employees
+- **Columns** = Calendar days (month view)
+- Click any cell to add/edit Clock IN / Clock OUT times
 - Hours are calculated automatically
-- "POST TO SCHEDULE" button saves changes
+- **POST TO SCHEDULE** button saves all changes
 - Navigate months with arrow buttons
 - Today's date is highlighted
 
-### 2. Employees
-- View all staff members with their job type and birthday
-- Add/edit employees (admin only)
-- Each employee gets a color-coded circle
-- Birthdays are highlighted when they're today
+### Other Screens
+1. **Employees** - Add/edit staff, set birthdays, job types, colors
+2. **Calculator** - Sum hours across any date range, view work history
+3. **Reports** - Stats, upcoming birthdays, export data
 
-### 3. Calculator
-- Calculate total hours for any employee(s) over any date range
-- Shows total hours worked, shift count
-- Overtime flagged when > 40 hours/week
-- View detailed work history per employee
+### Key Features
+- Lock screen with password (auto-lock timer)
+- Birthdays tracked with alerts
+- Job types: Server, Cook, Bartender, Host, Dishwasher, Busser, Manager
+- Time-off requests (admin approve/deny)
+- Call-in tracking
+- Holiday management
+- Audit log (admin only)
+- Print/export to CSV
+- Mobile-friendly interface
 
-### 4. Reports
-- Summary stats (total schedule entries, pending time-offs, call-ins, holidays)
-- Upcoming birthdays in next 30 days
-- Export all data to JSON file
+## Deployment
 
-## Key Features
+### Option 1: Render (Recommended)
+```bash
+# Push to GitHub, then:
+# 1. Create a Web Service on render.com
+# 2. Build command: node init-db.js
+# 3. Start command: node server.js
+```
 
-| Feature | Description |
-|---|---|
-| Lock Screen | Auto-lock with password protection, manual lock button |
-| Birthday Tracking | Employee birthdays shown with alerts |
-| Job Types | Server, Cook, Bartender, Host, Dishwasher, Busser, Manager |
-| Time-Off Requests | Submit, approve/deny requests |
-| Call-In Tracking | Record sick calls and absences |
-| Holidays | Define holidays with pay multipliers |
-| Audit Log | All changes tracked (admin only) |
-| Print Schedule | Directly print from browser |
-| CSV Export | Export schedule to CSV |
-| Mobile-Friendly | Large touch targets, bottom navigation |
-| Shift Calculator | Sum hours across any date range |
-| History View | Search historical schedule data |
+### Option 2: Railway
+```bash
+railway init
+railway up
+```
+
+### Option 3: Local Network
+```bash
+node server.js
+# Access from any device: http://{your-ip}:3000
+```
+
+### Option 4: Docker
+```bash
+docker build -t sunrise-scheduler .
+docker run -p 3000:3000 sunrise-scheduler
+```
 
 ## Project Structure
-
 ```
-sunrise-scheduler/
-├── server.js          # Express backend + API
-├── init-db.js         # Database initialization
-├── package.json       # Node.js dependencies
-├── scheduler.db       # SQLite database (auto-created)
+.
+├── server.js       # Backend API (Express)
+├── init-db.js      # Database setup
+├── package.json    # Dependencies
+├── scheduler.db    # SQLite database
+├── Dockerfile
+├── netlify.toml    # Netlify config (if deploying there)
 ├── README.md
 └── public/
-    ├── index.html     # Main UI
-    ├── styles.css     # All styling
-    └── app.js         # Frontend JavaScript
+    ├── index.html  # Frontend
+    ├── styles.css  # Styling
+    └── app.js      # UI logic
 ```
 
-## Technology
-
-- **Backend**: Node.js + Express
-- **Database**: SQLite (file-based, no extra setup)
-- **Frontend**: Vanilla HTML/CSS/JavaScript
-- **Authentication**: bcrypt + express-session
-
-## For Deployment (Cloud Access)
-
-### Deploy to Render
-1. Push to GitHub
-2. Create a Web Service on render.com
-3. Build command: `npm install && node init-db.js`
-4. Start command: `node server.js`
-
-### Deploy to Railway
-1. Push to GitHub
-2. Create project on railway.app from GitHub repo
-3. Auto-detects Node.js
-
 ## Support
-
 Call 555-0100 for help.

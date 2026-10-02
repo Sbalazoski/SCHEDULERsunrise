@@ -17,3 +17,5 @@ Thumbs.db
 
 # Test artifacts
 cookies.txt
+# Local Netlify folder
+.netlify
