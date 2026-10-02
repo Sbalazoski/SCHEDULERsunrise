@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sunrise Scheduler</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <!-- Lock Screen -->
+  <div id="lock-screen" class="lock-screen hidden">
+    <div class="lock-content">
+      <div class="lock-logo">
+        <i class="fas fa-utensils"></i>
+        <span id="lock-restaurant">Sunrise</span>
+      </div>
+      <div class="lock-time" id="lock-time">00:00</div>
+      <div class="lock-date" id="lock-date">Loading...</div>
+      <form id="unlock-form">
+        <div class="input-group">
+          <input type="password" id="unlock-password" placeholder=" " autocomplete="off" required>
+          <label for="unlock-password">PASSWORD</label>
+          <button type="submit" class="btn btn-primary btn-large">
+            <i class="fas fa-unlock"></i> UNLOCK
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Login Screen -->
+  <div id="login-screen" class="login-screen">
+    <div class="login-container">
+      <div class="login-logo">
+        <i class="fas fa-utensils"></i>
+        <h1>SUNRISE</h1>
+        <h2>SCHEDULER</h2>
+      </div>
+      <p class="login-subtitle">Employee Scheduling System</p>
+      <form id="login-form" class="login-form">
+        <div class="input-group">
+          <input type="text" id="username" placeholder=" " autocomplete="username" required>
+          <label for="username">Username</label>
+        </div>
+        <div class="input-group">
+          <input type="password" id="password" placeholder=" " autocomplete="current-password" required>
+          <label for="password">Password</label>
+        </div>
+        <button type="submit" class="btn btn-primary btn-large">
+          <i class="fas fa-sign-in-alt"></i> SIGN IN
+        </button>
+      </form>
+      <div class="login-hint">
+        <p>Need help? Call 555-0100</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main App -->
+  <div id="app" class="app hidden">
+    <header class="header">
+      <div class="header-left">
+        <h1 class="header-title">
+          <i class="fas fa-utensils"></i>
+          <span id="restaurant-name">Sunrise Restaurant</span>
+        </h1>
+      </div>
+      <div class="header-center">
+        <h2 id="view-title">Dashboard</h2>
+      </div>
+      <div class="header-right">
+        <span id="user-name"></span>
+        <button id="lock-btn" class="btn btn-ghost btn-icon" title="Lock">
+          <i class="fas fa-lock"></i>
+        </button>
+        <button id="logout-btn" class="btn btn-ghost btn-icon" title="Logout">
+          <i class="fas fa-sign-out-alt"></i>
+        </button>
+      </div>
+    </header>
+
+    <nav class="bottom-bar">
+      <button class="bottom-btn active" data-view="scheduler"><i class="fas fa-calendar"></i><span>Schedule</span></button>
+      <button class="bottom-btn" data-view="employees"><i class="fas fa-users"></i><span>Staff</span></button>
+      <button class="bottom-btn" data-view="calculator"><i class="fas fa-calculator"></i><span>Calculator</span></button>
+      <button class="bottom-btn" data-view="reports"><i class="fas fa-chart-bar"></i><span>Reports</span></button>
+    </nav>
+
+    <main class="main-content">
+      <div id="content"></div>
+    </main>
+  </div>
+
+  <div id="toast" class="toast"></div>
+
+  <script src="/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,19 @@
+# Dependencies
+node_modules/
+
+# Database
+scheduler.db
+
+# Logs
+*.log
+npm-debug.log*
+
+# Environment
+.env
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Test artifacts
+cookies.txt
