@@ -5,7 +5,9 @@
 
 [functions]
   included_files = ["scheduler.sql.js"]
-  node_modules = ["sql.js", "sql-wasm.js"]
+
+[functions.node_modules]
+  external_node_modules = ["sql.js"]
 
 [[redirects]]
   from = "/api/*"
