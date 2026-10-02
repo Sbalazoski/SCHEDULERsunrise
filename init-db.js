@@ -60,6 +60,10 @@ async function init() {
 
   const now = new Date().toISOString();
 
+  // Only seed if tables are empty
+  const count = dbGet('SELECT COUNT(*) as cnt FROM job_types');
+  const hasData = count && count.cnt > 0;
+
   // Insert helper
   function dbRun(sql, params = []) {
     const stmt = db.prepare(sql);
@@ -74,7 +78,7 @@ async function init() {
     if (!stmt.step()) { stmt.free(); return null; }
     const row = stmt.getAsObject();
     stmt.free();
-    return row.id !== undefined ? row : null;
+    return row;
   }
 
   const jobTypes = ['Server', 'Cook', 'Bartender', 'Host/Hostess', 'Dishwasher', 'Busser', 'Manager'];
@@ -100,19 +104,25 @@ async function init() {
     dbRun('INSERT OR IGNORE INTO settings (key, value, description) VALUES (?, ?, ?)', [s[0], s[1], s[2]]);
   });
 
-  const serverRole = dbGet('SELECT id FROM job_types WHERE name = ?', ['Server']);
-  const cookRole = dbGet('SELECT id FROM job_types WHERE name = ?', ['Cook']);
+  // Check if employees already exist before seeding
+  const empCount = dbGet('SELECT COUNT(*) as cnt FROM employees');
+  if (empCount && empCount.cnt > 0) {
+    console.log('Database already has data, skipping seed.');
+  } else {
+    const serverRole = dbGet('SELECT id FROM job_types WHERE name = ?', ['Server']);
+    const cookRole = dbGet('SELECT id FROM job_types WHERE name = ?', ['Cook']);
 
-  const employees = [
-    ['Alice Johnson', 'alice@sunrise.com', '555-0101', serverRole.id, '1990-05-15', '#3B82F6'],
-    ['Bob Martinez', 'bob@sunrise.com', '555-0102', cookRole.id, '1988-11-22', '#EF4444'],
-    ['Carol Smith', 'carol@sunrise.com', '555-0103', serverRole.id, '1992-03-08', '#F59E0B']
-  ];
+    const employees = [
+      ['Alice Johnson', 'alice@sunrise.com', '555-0101', serverRole.id, '1990-05-15', '#3B82F6'],
+      ['Bob Martinez', 'bob@sunrise.com', '555-0102', cookRole.id, '1988-11-22', '#EF4444'],
+      ['Carol Smith', 'carol@sunrise.com', '555-0103', serverRole.id, '1992-03-08', '#F59E0B']
+    ];
 
-  employees.forEach(emp => {
-    dbRun('INSERT OR IGNORE INTO employees (id, name, email, phone, job_type_id, birthday, color, is_active, created_at, updated_at) VALUES (?, ?, ?, ?, ?, ?, ?, 1, ?, ?)',
-      [require('uuid').v4(), emp[0], emp[1], emp[2], emp[3], emp[4], emp[5], now, now]);
-  });
+    employees.forEach(emp => {
+      dbRun('INSERT OR IGNORE INTO employees (id, name, email, phone, job_type_id, birthday, color, is_active, created_at, updated_at) VALUES (?, ?, ?, ?, ?, ?, ?, 1, ?, ?)',
+        [require('uuid').v4(), emp[0], emp[1], emp[2], emp[3], emp[4], emp[5], now, now]);
+    });
+  }
 
   const sqlBuffer = db.export();
   fs.writeFileSync(sqlPath, Buffer.from(sqlBuffer));
